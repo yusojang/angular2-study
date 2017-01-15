@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Hero} from './hero'
 
+import { HeroService } from './hero.service'
 
-
-const HEROES: Hero[] = [
-  { id: 11, name: 'jang'},
-  { id: 12, name: 'park'},
-  { id: 13, name: 'yoo'},
-  { id: 14, name: 'kwon'},
-];
+//copy & paste to mock-heroes
+//const HEROES: Hero[] = [
+//  { id: 11, name: 'jang'},
+// { id: 12, name: 'park'},
+//  { id: 13, name: 'yoo'},
+//  { id: 14, name: 'kwon'},
+//];
 
 @Component({
   selector: 'app-root',
@@ -17,14 +18,21 @@ const HEROES: Hero[] = [
 })
 
 
-export class AppComponent {
-  title = 'my heroes';
-  heroes = HEROES;
-  selectedHero: Hero;
+export class AppComponent implements OnInit{
+  constructor(private heroservice : HeroService){}
 
-  onSelect(hero:Hero) : void {
+
+    title = 'my heroes';
+    heroes : Hero[];
+    selectedHero: Hero;
+    onSelect(hero:Hero) : void {
     this.selectedHero = hero;
-  }
+    }
+ngOnInit() : void {
+  this.heroservice.getHeroes()
+  .then(result => this.heroes = result);  
+}
+
 }
 
 
