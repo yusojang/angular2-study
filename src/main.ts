@@ -9,4 +9,5 @@ if (environment.production) {
   enableProdMode();
 }
 
+//브라우저에서 Angular를 사용하기 위해 하는 것
 platformBrowserDynamic().bootstrapModule(AppModule);

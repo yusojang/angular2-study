@@ -7,7 +7,13 @@ import { HEROES } from './mock-heroes'
 export class HeroService {
 
   constructor() { }
-  getHeroes() : Promise<Hero[]>{
+  getHero(id: number) : Promise {
+    
+    return this.getHeroes().then(heroes => heroes.find(hero => hero.id === id));
+  }
+
+  getHeroes() : Promise {
+
     return Promise.resolve(HEROES);
   }
 
